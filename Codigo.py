@@ -33,12 +33,11 @@ def print_campus():
         else:
             print("   No hay dispositivos en este campus.")
     
-    # Agregar opción para regresar al menú principal
     print("\n0. Regresar al menú principal.")
 
     choice = input("Elija una opción: ")
     if choice == "0":
-        return -1  # Devolver -1 para indicar que se seleccionó "Regresar al menú principal"
+        return -1
     else:
         return int(choice) - 1
 
@@ -52,35 +51,34 @@ def add_device():
     device_choice = input("Elija su opción: ")
     device_name = input("Agregue el nombre de su dispositivo: ")
 
-    if device_choice == "1":  # Si se elige la opción 1 (Router)
+    if device_choice == "1":
         campus_choice = print_campus()
         if campus_choice == -1:
-            main()  # Si se selecciona "Regresar al menú principal", volver al menú principal
+            main()
         if 0 <= campus_choice < len(campus):
             campus_name = campus[campus_choice]
             filename = f"{campus_name}.txt"
             with open(filename, "a") as file:
                 dispositivos_por_campus[campus_name].append(device_name)
-                # Llamar a la función para configurar el router después de agregarlo al campus
                 configure_router(device_name)
-    elif device_choice == "2":  # Si se elige la opción 2 (Switch)
+    elif device_choice == "2":
         campus_choice = print_campus()
         if campus_choice == -1:
-            main()  # Si se selecciona "Regresar al menú principal", volver al menú principal
+            main()
         if 0 <= campus_choice < len(campus):
             campus_name = campus[campus_choice]
             dispositivos_por_campus[campus_name].append(device_name)
             print(f"{device_name} asignado correctamente al campus {campus_name}.")
-            configure_switch(device_name)  # Llamar a la función para configurar el switch después de agregarlo al campus
-    elif device_choice == "3":  # Si se elige la opción 3 (Switch multicapa)
+            configure_switch(device_name)
+    elif device_choice == "3":
         campus_choice = print_campus()
         if campus_choice == -1:
-            main()  # Si se selecciona "Regresar al menú principal", volver al menú principal
+            main()
         if 0 <= campus_choice < len(campus):
             campus_name = campus[campus_choice]
             dispositivos_por_campus[campus_name].append(device_name)
             print(f"{device_name} asignado correctamente al campus {campus_name}.")
-            configure_switch_multilayer(device_name)  # Llamar a la función para configurar el switch multicapa después de agregarlo al campus
+            configure_switch_multilayer(device_name)
     else:
         print("La opción seleccionada no es válida para asignar un dispositivo.")
         input("Presione Enter para continuar...")
@@ -98,7 +96,6 @@ def list_devices():
     if not devices_exist:
         print("No se encuentra ningún dispositivo creado.")
     
-    # Agregar opción para regresar al menú principal
     print("\n0. Regresar al menú principal.")
 
     choice = input("Elija una opción: ")
@@ -110,7 +107,7 @@ def delete_device():
     print("Seleccione el campus del cual desea borrar un dispositivo:")
     choice = print_campus()
     if choice == -1:
-        main()  # Si se selecciona "Regresar al menú principal", volver al menú principal
+        main()
     if 0 <= choice < len(campus):
         campus_name = campus[choice]
         devices = dispositivos_por_campus[campus_name]
@@ -135,7 +132,7 @@ def delete_campus():
     print("Seleccione el campus que desea borrar:")
     choice = print_campus()
     if choice == -1:
-        main()  # Si se selecciona "Regresar al menú principal", volver al menú principal
+        main()
     if 0 <= choice < len(campus):
         campus_name = campus[choice]
         del dispositivos_por_campus[campus_name]
@@ -168,14 +165,11 @@ def configure_router(device_name):
 
     choice = input("Elija una opción para configurar el router: ")
 
-    # Aquí puedes agregar lógica para manejar cada opción elegida por el usuario
-    # Por ejemplo, podrías solicitar más información al usuario o ejecutar comandos específicos del router.
-
     if choice == "0":
-        main()  # Regresar al menú principal
+        main()
     else:
         print("Opción no válida. Por favor, elija una opción válida.")
-        configure_router(device_name)  # Volver a llamar a la función si la opción no es válida
+        configure_router(device_name)
 
 def configure_switch(device_name):
     clear_screen()
@@ -190,14 +184,11 @@ def configure_switch(device_name):
 
     choice = input("Elija una opción para configurar el switch: ")
 
-    # Aquí puedes agregar lógica para manejar cada opción elegida por el usuario
-    # Por ejemplo, podrías solicitar más información al usuario o ejecutar comandos específicos del switch.
-
     if choice == "0":
-        main()  # Regresar al menú principal
+        main()
     else:
         print("Opción no válida. Por favor, elija una opción válida.")
-        configure_switch(device_name)  # Volver a llamar a la función si la opción no es válida
+        configure_switch(device_name)
 
 def configure_switch_multilayer(device_name):
     clear_screen()
@@ -212,14 +203,11 @@ def configure_switch_multilayer(device_name):
 
     choice = input("Elija una opción para configurar el switch multicapa: ")
 
-    # Aquí puedes agregar lógica para manejar cada opción elegida por el usuario
-    # Por ejemplo, podrías solicitar más información al usuario o ejecutar comandos específicos del switch.
-
     if choice == "0":
-        main()  # Regresar al menú principal
+        main()
     else:
         print("Opción no válida. Por favor, elija una opción válida.")
-        configure_switch_multilayer(device_name)  # Volver a llamar a la función si la opción no es válida
+        configure_switch_multilayer(device_name)
 
 def main():
     clear_screen()
@@ -230,8 +218,7 @@ def main():
     elif choice == 2:
         campus_choice = print_campus()
         if campus_choice == -1:
-            main()  # Si se selecciona "Regresar al menú principal", volver al menú principal
-        # Aquí puedes continuar con la lógica de la opción seleccionada del campus
+            main()
     elif choice == 3:
         add_device()
     elif choice == 4:
@@ -240,8 +227,6 @@ def main():
         delete_device()
     elif choice == 6:
         delete_campus()
-    # Puedes continuar con las otras opciones del menú
 
 if __name__ == "__main__":
     main()
-
